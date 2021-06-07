@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 
+# I don't believe in license.
+# You can do whatever you want with this program.
+
 import os
 import sys
 import re
@@ -18,7 +21,7 @@ TOKENS_FILE = os.path.dirname(os.path.realpath(__file__))+'/.tokens'
 def githubApiSearchCode( token, search, page, sort, order ):
     headers = { "Authorization":"token "+token }
     url = 'https://api.github.com/search/code?per_page=100&s=' + sort + '&type=Code&o=' + order + '&q=' + search + '&page=' + str(page)
-    # print(">>> "+url)
+    print(">>> "+url)
 
     try:
         r = requests.get( url, headers=headers, timeout=5 )
@@ -30,10 +33,10 @@ def githubApiSearchCode( token, search, page, sort, order ):
 
 
 def getRawUrl( result ):
-    raw_url = result['html_url'];
+    raw_url = result['html_url']
     raw_url = raw_url.replace( 'https://github.com/', 'https://raw.githubusercontent.com/' )
     raw_url = raw_url.replace( '/blob/', '/' )
-    return raw_url;
+    return raw_url
 
 
 def readCode( domain_regexp, source, result ):
